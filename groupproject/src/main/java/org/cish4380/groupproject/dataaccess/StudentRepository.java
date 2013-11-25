@@ -22,18 +22,16 @@ import org.springframework.stereotype.Component;
 import com.mongodb.WriteResult;
 import org.cish4380.groupproject.domain.Student;
 
-
-
 @Component
 public class StudentRepository implements Repository<Student> {
 
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public void setMongoTemplate(MongoTemplate template) {
+    public void setMongoTemplate(MongoTemplate template){
         this.mongoTemplate = template;
     }
-
+    
     @Override
     public Student getOne(String id) {
         // TODO Auto-generated method stub
@@ -71,5 +69,4 @@ public class StudentRepository implements Repository<Student> {
             mongoTemplate.dropCollection(Student.class);
         }
     }
-
 }

@@ -15,10 +15,12 @@
 
             <ul>
                 <c:forEach var="listValue" items="${students}">
-                    <li>${listValue.firstName} ${listValue.lastName}</li>
+                    <li>${listValue.firstName} ${listValue.lastName} <a href="${pageContext.request.contextPath}/students/${listValue.id}">View</a></li>
                     </c:forEach>
             </ul>
-
+            
         </c:if>
+        
+        <a href="${pageContext.request.contextPath}/">Home</a>
     </body>
 </html>

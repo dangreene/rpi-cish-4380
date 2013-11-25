@@ -23,11 +23,13 @@ import org.junit.Test;
 public class StudentRepositoryTests {
 
     public Repository<Student> getStudentRepository() {
-        StudentRepository repo = new StudentRepository();
-        WebConfig config = new WebConfig();
+        
+        StudentRepository repo = null;
 
         try {
-            repo.setMongoTemplate(config.getMongoTemplate(config.getMongoInstance()));
+           repo = new StudentRepository();
+           WebConfig config = new WebConfig();
+           repo.setMongoTemplate(config.getMongoTemplate(config.getMongoInstance()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

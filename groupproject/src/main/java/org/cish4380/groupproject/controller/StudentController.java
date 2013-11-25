@@ -11,7 +11,9 @@ import org.cish4380.groupproject.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -21,28 +23,37 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class StudentController {
 
-    @Autowired
-    private Repository<Student> studentRepository;
+    private final Repository<Student> studentRepository;
     
-    public void setStudentRepository(Repository<Student> repository) {
-       studentRepository = repository; 
+    @Autowired
+    public StudentController(Repository<Student> repository) {
+        this.studentRepository = repository; 
+        this.studentRepository.dropCollection();
+        this.studentRepository.createCollection();
+        this.studentRepository.create(new Student("Dan", "Greene"));
+        this.studentRepository.create(new Student("John", "Geoghegan"));
+        this.studentRepository.create(new Student("Jon", "Braverman"));        
     }
    
+    @RequestMapping("/") 
+    public String loadIndex(){
+        return "index";
+    }
+    
     @RequestMapping("students") 
-    public ModelAndView loadViewStudents(Model m) {
-        createTestData(studentRepository);
+    public ModelAndView loadViewStudents() {
         List<Student> students = studentRepository.getAll();
         ModelAndView modelAndView = new ModelAndView("viewstudents");
         modelAndView.addObject("students", students);
         return modelAndView;
     }
     
-    private void createTestData(Repository<Student> repository){
-        repository.dropCollection();
-        repository.createCollection();
-        repository.create(new Student("Dan", "Greene"));
-        repository.create(new Student("John", "Geoghegan"));
-        repository.create(new Student("Jon", "Braverman"));
+    @RequestMapping(value = "students/{id}", method = RequestMethod.GET)
+    public ModelAndView loadStudent(@PathVariable String id){
+        ModelAndView modelAndView = new ModelAndView("viewstudent");
+        Student student = studentRepository.getOne(id);
+        modelAndView.addObject("student", student);
+        return modelAndView;
     }
    
 }
