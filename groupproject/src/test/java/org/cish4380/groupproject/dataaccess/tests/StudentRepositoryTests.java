@@ -6,8 +6,9 @@
 package org.cish4380.groupproject.dataaccess.tests;
 
 import org.cish4380.groupproject.dataaccess.Repository;
-import org.cish4380.groupproject.dataaccess.RepositoryFactory;
+import org.cish4380.groupproject.dataaccess.StudentRepository;
 import org.cish4380.groupproject.domain.Student;
+import org.cish4380.groupproject.springconfig.WebConfig;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -21,9 +22,22 @@ import org.junit.Test;
  */
 public class StudentRepositoryTests {
 
+    public Repository<Student> getStudentRepository() {
+        StudentRepository repo = new StudentRepository();
+        WebConfig config = new WebConfig();
+
+        try {
+            repo.setMongoTemplate(config.getMongoTemplate(config.getMongoInstance()));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return repo;
+    }
+
     @Before
     public void SetupTest() {
-        testRepository = RepositoryFactory.getStudentRepository();
+        //TODO: Instantiate repo
+        testRepository = getStudentRepository();
         testRepository.dropCollection();
         testRepository.createCollection();
     }
