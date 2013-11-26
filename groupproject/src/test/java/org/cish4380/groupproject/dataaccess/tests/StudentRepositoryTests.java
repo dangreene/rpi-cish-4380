@@ -6,7 +6,7 @@
 package org.cish4380.groupproject.dataaccess.tests;
 
 import org.cish4380.groupproject.dataaccess.Repository;
-import org.cish4380.groupproject.dataaccess.StudentRepository;
+import org.cish4380.groupproject.dataaccess.MongoStudentRepository;
 import org.cish4380.groupproject.domain.Student;
 import org.cish4380.groupproject.springconfig.WebConfig;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -24,10 +24,10 @@ public class StudentRepositoryTests {
 
     public Repository<Student> getStudentRepository() {
         
-        StudentRepository repo = null;
+        MongoStudentRepository repo = null;
 
         try {
-           repo = new StudentRepository();
+           repo = new MongoStudentRepository();
            WebConfig config = new WebConfig();
            repo.setMongoTemplate(config.getMongoTemplate(config.getMongoInstance()));
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class StudentRepositoryTests {
     @Test
     public void GetOne_RecordExists_ReturnsResult() {
         // Arrange
-        Student student = new Student("Dan", "Greene");
+        Student student = new Student("Dan Greene", null);
         testRepository.create(student);
 
         // Act
@@ -62,6 +62,6 @@ public class StudentRepositoryTests {
         System.out.println(student.getId());
 
         // Assert
-        assertThat(result.getFirstName(), is(equalTo("Dan")));
+        assertThat(result.getName(), is(equalTo("Dan Greene")));
     }
 }

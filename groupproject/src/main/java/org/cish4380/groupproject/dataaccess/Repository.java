@@ -5,7 +5,6 @@
  */
 package org.cish4380.groupproject.dataaccess;
 
-import com.mongodb.WriteResult;
 import java.util.List;
 
 /**
@@ -20,7 +19,7 @@ public interface Repository<T> {
 
     public void create(T object);
 
-    public WriteResult update(T object);
+    public void update(T object);
 
     public void createCollection();
 

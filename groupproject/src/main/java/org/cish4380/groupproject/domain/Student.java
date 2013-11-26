@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.cish4380.groupproject.domain;
 
-import org.springframework.data.annotation.Id;
+import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -14,37 +13,31 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Dan
  */
 @Document
-public class Student {
-	
-	public Student(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
-	
-	@Id
-	private String id;
-	
-	public String getId() {
-		return id;
-	}
-	
-	private String firstName;
-	
-	public String getFirstName() {
-		return firstName;
-	}
+public class Student extends BaseEntity {
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	
-	private String lastName;
-	
-	public String getLastName() {
-		return lastName;
-	}
+    public Student(String name, List<Course> courses) {
+        this.name = name;
+        this.courses = courses;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String firstName) {
+        this.name = firstName;
+    }
+
+    private List<Course> courses;
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
 }

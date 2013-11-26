@@ -30,9 +30,9 @@ public class StudentController {
         this.studentRepository = repository; 
         this.studentRepository.dropCollection();
         this.studentRepository.createCollection();
-        this.studentRepository.create(new Student("Dan", "Greene"));
-        this.studentRepository.create(new Student("John", "Geoghegan"));
-        this.studentRepository.create(new Student("Jon", "Braverman"));        
+        this.studentRepository.create(new Student("Dan Greene", null));
+        this.studentRepository.create(new Student("John Geoghegan", null));
+        this.studentRepository.create(new Student("Jon Braverman", null));        
     }
    
     @RequestMapping("/") 
