@@ -38,7 +38,7 @@ public class WebConfig {
     public DataSource getMySqlDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost/product");
+        dataSource.setUrl("jdbc:mysql://localhost/project");
         dataSource.setUsername("root");
         dataSource.setPassword("mypass");
         return dataSource;

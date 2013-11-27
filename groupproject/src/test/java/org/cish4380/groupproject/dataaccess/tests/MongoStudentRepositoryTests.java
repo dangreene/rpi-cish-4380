@@ -20,7 +20,7 @@ import org.junit.Test;
  *
  * @author Dan
  */
-public class StudentRepositoryTests {
+public class MongoStudentRepositoryTests {
 
     public Repository<Student> getStudentRepository() {
         
@@ -54,7 +54,7 @@ public class StudentRepositoryTests {
     @Test
     public void GetOne_RecordExists_ReturnsResult() {
         // Arrange
-        Student student = new Student("Dan Greene", null);
+        Student student = new Student("Dan Greene");
         testRepository.create(student);
 
         // Act

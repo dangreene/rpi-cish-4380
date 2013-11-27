@@ -5,7 +5,9 @@
  */
 package org.cish4380.groupproject.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -13,11 +15,26 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Dan
  */
 @Document
-public class Student extends BaseEntity {
+public class Student {
 
-    public Student(String name, List<Course> courses) {
+    public Student() {
+
+    }
+
+    public Student(String id, String name) {
+        this.id = id;
         this.name = name;
-        this.courses = courses;
+    }
+
+    @Id
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     private String name;
@@ -30,14 +47,14 @@ public class Student extends BaseEntity {
         this.name = firstName;
     }
 
-    private List<Course> courses;
+    private final List<Course> courses = new ArrayList<>();
 
-    public List<Course> getCourses() {
+    public Iterable<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
+    public void addCourse(Course course) {
+        this.courses.add(course);
     }
 
 }

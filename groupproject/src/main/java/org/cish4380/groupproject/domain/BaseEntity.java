@@ -13,13 +13,7 @@ import org.springframework.data.annotation.Id;
  * @author Dan
  */
 public abstract class BaseEntity {
-    @Id
-    private String id;
 
-    public String getId() {
-        return id;
-    }
-    
     public BaseEntity(){
         super();
     }

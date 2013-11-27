@@ -12,23 +12,21 @@ package org.cish4380.groupproject.domain;
 
 public class Course {
 
+    private String departmentName;    
     private String courseId;
-    private String sectionId;
+    private Short sectionId;
     private String semester;
-    private String year;
+    private Short year;
     private String grade;
-    private Integer credits;
-
-    public String getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    private Short credits;
+    
+    public Course() {
+        
     }
     
-    public Course(String courseId, String sectionId, String semester,
-            String year, String grade, Integer credits) {
+    public Course(String departmentName, String courseId, Short sectionId, String semester,
+            Short year, String grade, Short credits) {
+        this.departmentName = departmentName;
         this.courseId = courseId;
         this.sectionId = sectionId;
         this.semester = semester;
@@ -37,11 +35,27 @@ public class Course {
         this.credits = credits;
     }
 
-    public String getSectionId() {
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+    
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+    
+    public Short getSectionId() {
         return sectionId;
     }
 
-    public void setSectionId(String sectionId) {
+    public void setSectionId(Short sectionId) {
         this.sectionId = sectionId;
     }
 
@@ -53,11 +67,11 @@ public class Course {
         this.semester = semester;
     }
 
-    public String getYear() {
+    public Short getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(Short year) {
         this.year = year;
     }
 
@@ -69,11 +83,11 @@ public class Course {
         this.grade = grade;
     }
 
-    public Integer getCredits() {
+    public Short getCredits() {
         return credits;
     }
 
-    public void setCredits(Integer credits) {
+    public void setCredits(Short credits) {
         this.credits = credits;
     }
 
