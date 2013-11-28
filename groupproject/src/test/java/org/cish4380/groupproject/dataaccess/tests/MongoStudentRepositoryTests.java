@@ -54,7 +54,7 @@ public class MongoStudentRepositoryTests {
     @Test
     public void GetOne_RecordExists_ReturnsResult() {
         // Arrange
-        Student student = new Student("Dan Greene");
+        Student student = new Student("01", "Dan Greene", "");
         testRepository.create(student);
 
         // Act

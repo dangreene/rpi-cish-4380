@@ -16,6 +16,9 @@ public class StudentSummary {
     private String department;
     private Integer totalCredits;
 
+    public StudentSummary() {
+    }
+    
     public StudentSummary(String id, String name, String department, Integer totalCredits) {
         this.id = id;
         this.name = name;

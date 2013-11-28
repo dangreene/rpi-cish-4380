@@ -21,9 +21,10 @@ public class Student {
 
     }
 
-    public Student(String id, String name) {
+    public Student(String id, String name, String departmentName) {
         this.id = id;
         this.name = name;
+        this.departmentName = departmentName;
     }
 
     @Id
@@ -45,6 +46,16 @@ public class Student {
 
     public void setName(String firstName) {
         this.name = firstName;
+    }
+    
+    private String departmentName;
+    
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     private final List<Course> courses = new ArrayList<>();

@@ -12,7 +12,7 @@ package org.cish4380.groupproject.domain;
 
 public class Course {
 
-    private String departmentName;    
+        
     private String courseId;
     private Short sectionId;
     private String semester;
@@ -24,9 +24,9 @@ public class Course {
         
     }
     
-    public Course(String departmentName, String courseId, Short sectionId, String semester,
+    public Course(String courseId, Short sectionId, String semester,
             Short year, String grade, Short credits) {
-        this.departmentName = departmentName;
+        
         this.courseId = courseId;
         this.sectionId = sectionId;
         this.semester = semester;
@@ -35,13 +35,7 @@ public class Course {
         this.credits = credits;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
+    
     
     public String getCourseId() {
         return courseId;

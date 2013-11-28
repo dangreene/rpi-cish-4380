@@ -9,15 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import org.cish4380.groupproject.domain.Course;
 import org.cish4380.groupproject.domain.Student;
+import org.cish4380.groupproject.domain.StudentSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,7 +26,7 @@ import org.springframework.stereotype.Component;
  * @author Dan
  */
 @Component
-public class JdbcStudentRepository implements Repository<Student> {
+public class JdbcStudentRepository implements Repository<Student>,StudentsSummaryRepository {
     
     @Autowired
     private JdbcTemplate template;
@@ -36,17 +37,34 @@ public class JdbcStudentRepository implements Repository<Student> {
     
     @Override
     public Student getOne(String id) {
-        return this.template.queryForObject("select * from student where ID =".concat(id), new SingleStudentMapper());
+        return this.template.query("select * from student left join takes using(ID) where ID =".concat(id), new StudentMapper()).get(0);
     }
 
-    private static final class SingleStudentMapper implements RowMapper<Student> {
+    @Override
+    public Iterator<StudentSummary> getStudentSummaryResults() {
+        String query = "select ID, name, dept_name, sum(credits) as tot_credits " +
+                "from student left join takes using(ID) " +
+                "group by ID";
+        return this.template.query(query, new StudentSummaryMapper()).iterator();
+    }
+    
+    private static final class StudentSummaryMapper implements ResultSetExtractor<Iterable<StudentSummary>> {
+
         @Override
-        public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Student student = new Student();
-            student.setId(rs.getString("ID"));
-            student.setName(rs.getString("name"));
-            Course course = new Course();
-            return student;
+        public Iterable<StudentSummary> extractData(ResultSet rs) throws SQLException, DataAccessException {
+            
+            List<StudentSummary> summaryList = new ArrayList<>();
+            
+            while (rs.next()) {
+                StudentSummary studentSummary = new StudentSummary();
+                studentSummary.setId(rs.getString("ID"));
+                studentSummary.setName(rs.getString("name"));
+                studentSummary.setDepartment(rs.getString("dept_name"));
+                studentSummary.setTotalCredits(rs.getInt("tot_credits"));
+                summaryList.add(studentSummary);
+            }
+            
+            return summaryList;
         }
     }
     
@@ -65,12 +83,11 @@ public class JdbcStudentRepository implements Repository<Student> {
 
                 // If the student is not in map, create a new one and add it
                 if (student == null) {
-                    student = new Student(rs.getString("ID"), rs.getString("name"));
+                    student = new Student(rs.getString("ID"), rs.getString("name"), rs.getString("dept_name"));
                     map.put(id, student);
                 }
                 
                 Course course = new Course();
-                course.setDepartmentName(rs.getString("dept_name"));
                 course.setCourseId(rs.getString("course_id"));
                 course.setSectionId(rs.getShort("sec_id"));
                 course.setSemester(rs.getString("semester"));
