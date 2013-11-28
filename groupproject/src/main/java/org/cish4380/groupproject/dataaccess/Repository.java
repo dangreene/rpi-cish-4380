@@ -24,5 +24,7 @@ public interface Repository<T> {
     public void createCollection();
 
     public void dropCollection();
+    
+    public void createTestData();
 
 }

@@ -5,6 +5,7 @@
  */
 package org.cish4380.groupproject.dataaccess.tests;
 
+import java.util.List;
 import org.cish4380.groupproject.dataaccess.Repository;
 import org.cish4380.groupproject.dataaccess.MongoStudentRepository;
 import org.cish4380.groupproject.domain.Student;
@@ -12,6 +13,7 @@ import org.cish4380.groupproject.springconfig.WebConfig;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import org.junit.AfterClass;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,13 +25,13 @@ import org.junit.Test;
 public class MongoStudentRepositoryTests {
 
     public Repository<Student> getStudentRepository() {
-        
+
         MongoStudentRepository repo = null;
 
         try {
-           repo = new MongoStudentRepository();
-           WebConfig config = new WebConfig();
-           repo.setMongoTemplate(config.getMongoTemplate(config.getMongoInstance()));
+            repo = new MongoStudentRepository();
+            WebConfig config = new WebConfig();
+            repo.setMongoTemplate(config.getMongoTemplate(config.getMongoInstance()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -44,7 +46,7 @@ public class MongoStudentRepositoryTests {
         testRepository.createCollection();
     }
 
-    private Repository<Student> testRepository;
+    private static Repository<Student> testRepository;
 
     @Test
     public void GetRepository_ReturnsInstance() {
@@ -63,5 +65,17 @@ public class MongoStudentRepositoryTests {
 
         // Assert
         assertThat(result.getName(), is(equalTo("Dan Greene")));
+    }
+
+    @Test
+    public void CreateTestData_DataCreated() {
+        testRepository.createTestData();
+        List<Student> students = testRepository.getAll();
+        assertThat(students.size(), is(equalTo(13)));
+    }
+
+    @AfterClass
+    public static void oneTimeTearDown() {
+        testRepository.createTestData();
     }
 }

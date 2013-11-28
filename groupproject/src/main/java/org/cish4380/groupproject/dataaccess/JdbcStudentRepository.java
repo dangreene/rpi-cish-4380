@@ -47,6 +47,11 @@ public class JdbcStudentRepository implements Repository<Student>,StudentsSummar
                 "group by ID";
         return this.template.query(query, new StudentSummaryMapper()).iterator();
     }
+
+    @Override
+    public void createTestData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     private static final class StudentSummaryMapper implements ResultSetExtractor<Iterable<StudentSummary>> {
 
