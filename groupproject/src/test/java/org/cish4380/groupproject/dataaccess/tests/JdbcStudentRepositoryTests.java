@@ -98,4 +98,19 @@ public class JdbcStudentRepositoryTests {
         
         assertThat(s.getTotalCredits(), is(equalTo(7)));
     }
+    
+    @Test
+    public void getStudentSummaryResults_nocourses_0credits() {
+        StudentsSummaryRepository repo = (StudentsSummaryRepository) testRepository;
+        Iterator<StudentSummary> summaries = repo.getStudentSummaryResults();
+
+        StudentSummary s = Iterators.find(summaries, new Predicate<StudentSummary>() {
+            @Override
+            public boolean apply(StudentSummary s) {
+                return s.getId().equals("70557");
+            }
+        });
+        
+        assertThat(s.getTotalCredits(), is(equalTo(0)));
+    }
 }
