@@ -108,7 +108,7 @@ public class JdbcStudentRepository implements Repository<Student>,StudentsSummar
     
     @Override
     public List<Student> getAll() {
-        return this.template.query("select * from student join takes using(ID)", new StudentMapper());
+        return this.template.query("select * from student left join takes using(ID)", new StudentMapper());
     }
     
     @Override
