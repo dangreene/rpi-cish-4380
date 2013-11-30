@@ -8,7 +8,6 @@ package org.cish4380.groupproject.dataaccess;
 import java.util.Iterator;
 import java.util.List;
 import org.cish4380.groupproject.domain.Course;
-import org.cish4380.groupproject.domain.StudentSummary;
 import org.cish4380.groupproject.domain.StudentSummaryResult;
 import org.cish4380.groupproject.domain.StudentWithCourse;
 import org.springframework.beans.factory.annotation.Autowired;
