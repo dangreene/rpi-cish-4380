@@ -5,14 +5,16 @@
  */
 package org.cish4380.groupproject.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  *
  * @author Dan
  */
 
+@Document
 public class Course {
 
-        
     private String courseId;
     private Short sectionId;
     private String semester;
@@ -35,8 +37,6 @@ public class Course {
         this.credits = credits;
     }
 
-    
-    
     public String getCourseId() {
         return courseId;
     }

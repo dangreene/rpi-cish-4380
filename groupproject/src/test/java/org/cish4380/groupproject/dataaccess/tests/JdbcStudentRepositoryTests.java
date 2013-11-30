@@ -16,6 +16,7 @@ import org.cish4380.groupproject.dataaccess.StudentsSummaryRepository;
 import org.cish4380.groupproject.domain.Course;
 import org.cish4380.groupproject.domain.Student;
 import org.cish4380.groupproject.domain.StudentSummary;
+import org.cish4380.groupproject.domain.StudentSummaryResult;
 import org.cish4380.groupproject.springconfig.WebConfig;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -87,30 +88,30 @@ public class JdbcStudentRepositoryTests {
     @Test
     public void getStudentSummaryResults() {
         StudentsSummaryRepository repo = (StudentsSummaryRepository) testRepository;
-        Iterator<StudentSummary> summaries = repo.getStudentSummaryResults();
+        Iterator<StudentSummaryResult> summaries = repo.getStudentSummaryResults();
 
-        StudentSummary s = Iterators.find(summaries, new Predicate<StudentSummary>() {
+        StudentSummaryResult s = Iterators.find(summaries, new Predicate<StudentSummaryResult>() {
             @Override
-            public boolean apply(StudentSummary s) {
+            public boolean apply(StudentSummaryResult s) {
                 return s.getId().equals("11128");
             }
         });
         
-        assertThat(s.getTotalCredits(), is(equalTo(7)));
+        assertThat(s.getValue().getTotalCredits(), is(equalTo(7)));
     }
     
     @Test
     public void getStudentSummaryResults_nocourses_0credits() {
         StudentsSummaryRepository repo = (StudentsSummaryRepository) testRepository;
-        Iterator<StudentSummary> summaries = repo.getStudentSummaryResults();
+        Iterator<StudentSummaryResult> summaries = repo.getStudentSummaryResults();
 
-        StudentSummary s = Iterators.find(summaries, new Predicate<StudentSummary>() {
+        StudentSummaryResult s = Iterators.find(summaries, new Predicate<StudentSummaryResult>() {
             @Override
-            public boolean apply(StudentSummary s) {
+            public boolean apply(StudentSummaryResult s) {
                 return s.getId().equals("70557");
             }
         });
         
-        assertThat(s.getTotalCredits(), is(equalTo(0)));
+        assertThat(s.getValue().getTotalCredits(), is(equalTo(0)));
     }
 }

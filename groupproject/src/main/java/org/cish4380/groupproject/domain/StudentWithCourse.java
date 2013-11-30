@@ -3,40 +3,53 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package org.cish4380.groupproject.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  *
  * @author Dan
  */
-@Document(collection = "student")
-public class Student {
+@Document(collection = "StudentWithCourse")
+public class StudentWithCourse {
+    private Course course;
+    private String studentId;
 
-    public Student() {
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+    
+    public StudentWithCourse() {
 
     }
 
-    public Student(String id, String name, String departmentName) {
-        this.id = id;
+    public StudentWithCourse(String studentId, String name, String departmentName, Course course) {
+        this.studentId = studentId;
         this.name = name;
         this.departmentName = departmentName;
+        this.course = course;
     }
-
+    
     @Id
     private String id;
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     private String name;
@@ -58,15 +71,4 @@ public class Student {
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
-
-    private final List<Course> courses = new ArrayList<>();
-
-    public Iterable<Course> getCourses() {
-        return courses;
-    }
-
-    public void addCourse(Course course) {
-        this.courses.add(course);
-    }
-
 }

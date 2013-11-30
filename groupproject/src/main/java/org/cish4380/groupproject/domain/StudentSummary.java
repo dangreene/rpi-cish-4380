@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.cish4380.groupproject.domain;
 
 /**
@@ -11,27 +10,15 @@ package org.cish4380.groupproject.domain;
  * @author Dan
  */
 public class StudentSummary {
-    private String id;
-    private String name;
+
     private String department;
-    private Integer totalCredits;
 
-    public StudentSummary() {
+    public String getDepartment() {
+        return department;
     }
-    
-    public StudentSummary(String id, String name, String department, Integer totalCredits) {
-        this.id = id;
-        this.name = name;
+
+    public void setDepartment(String department) {
         this.department = department;
-        this.totalCredits = totalCredits;
-    }
-    
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -42,14 +29,6 @@ public class StudentSummary {
         this.name = name;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public Integer getTotalCredits() {
         return totalCredits;
     }
@@ -57,8 +36,7 @@ public class StudentSummary {
     public void setTotalCredits(Integer totalCredits) {
         this.totalCredits = totalCredits;
     }
-
-    
-    
-    
+    private String name;
+    private Integer totalCredits;
+  
 }

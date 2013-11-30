@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 
-
-function() {
-    emit( this.candNm, {count: 1, candNm: this.candNm, amt: this.contbReceiptAmt} );
+function() { 
+    var sum = 0;
+    for (var i = 0; i < this.courses.length; i++) {
+        sum += this.courses[i].credits;
+    }  
+    emit(this._id, sum);
 }
 
-function () {
-    for (var i = 0; i < this.x.length; i++) {
-        emit(this.x[i], 1);
-    }
-}

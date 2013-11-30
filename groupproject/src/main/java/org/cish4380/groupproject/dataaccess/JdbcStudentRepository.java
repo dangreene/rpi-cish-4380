@@ -15,6 +15,7 @@ import java.util.Map;
 import org.cish4380.groupproject.domain.Course;
 import org.cish4380.groupproject.domain.Student;
 import org.cish4380.groupproject.domain.StudentSummary;
+import org.cish4380.groupproject.domain.StudentSummaryResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,7 +42,7 @@ public class JdbcStudentRepository implements Repository<Student>,StudentsSummar
     }
 
     @Override
-    public Iterator<StudentSummary> getStudentSummaryResults() {
+    public Iterator<StudentSummaryResult> getStudentSummaryResults() {
         String query = "select ID, name, dept_name, sum(credits) as tot_credits " +
                 "from student left join takes using(ID) " +
                 "group by ID";
@@ -53,20 +54,22 @@ public class JdbcStudentRepository implements Repository<Student>,StudentsSummar
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    private static final class StudentSummaryMapper implements ResultSetExtractor<Iterable<StudentSummary>> {
+    private static final class StudentSummaryMapper implements ResultSetExtractor<Iterable<StudentSummaryResult>> {
 
         @Override
-        public Iterable<StudentSummary> extractData(ResultSet rs) throws SQLException, DataAccessException {
+        public Iterable<StudentSummaryResult> extractData(ResultSet rs) throws SQLException, DataAccessException {
             
-            List<StudentSummary> summaryList = new ArrayList<>();
+            List<StudentSummaryResult> summaryList = new ArrayList<>();
             
             while (rs.next()) {
+                StudentSummaryResult studentResult = new StudentSummaryResult();
                 StudentSummary studentSummary = new StudentSummary();
-                studentSummary.setId(rs.getString("ID"));
+                studentResult.setId(rs.getString("ID"));
                 studentSummary.setName(rs.getString("name"));
                 studentSummary.setDepartment(rs.getString("dept_name"));
                 studentSummary.setTotalCredits(rs.getInt("tot_credits"));
-                summaryList.add(studentSummary);
+                studentResult.setValue(studentSummary);
+                summaryList.add(studentResult);
             }
             
             return summaryList;

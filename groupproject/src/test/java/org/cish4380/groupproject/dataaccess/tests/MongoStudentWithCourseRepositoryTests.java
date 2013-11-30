@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package org.cish4380.groupproject.dataaccess.tests;
 
 import java.util.Iterator;
 import java.util.List;
+import org.cish4380.groupproject.dataaccess.MongoStudentWithCourseRepository;
 import org.cish4380.groupproject.dataaccess.Repository;
-import org.cish4380.groupproject.dataaccess.MongoStudentRepository;
 import org.cish4380.groupproject.dataaccess.StudentsSummaryRepository;
-import org.cish4380.groupproject.domain.Student;
-import org.cish4380.groupproject.domain.StudentSummary;
 import org.cish4380.groupproject.domain.StudentSummaryResult;
+import org.cish4380.groupproject.domain.StudentWithCourse;
 import org.cish4380.groupproject.springconfig.WebConfig;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -26,14 +26,13 @@ import org.junit.Test;
  *
  * @author Dan
  */
-public class MongoStudentRepositoryTests {
+public class MongoStudentWithCourseRepositoryTests {
+    public Repository<StudentWithCourse> getStudentRepository() {
 
-    public Repository<Student> getStudentRepository() {
-
-        MongoStudentRepository repo = null;
+        MongoStudentWithCourseRepository repo = null;
 
         try {
-            repo = new MongoStudentRepository();
+            repo = new MongoStudentWithCourseRepository();
             WebConfig config = new WebConfig();
             repo.setMongoTemplate(config.getMongoTemplate(config.getMongoInstance()));
         } catch (Exception e) {
@@ -50,34 +49,13 @@ public class MongoStudentRepositoryTests {
         testRepository.createCollection();
     }
 
-    private static Repository<Student> testRepository;
+    private static Repository<StudentWithCourse> testRepository;
 
     @Test
     public void GetRepository_ReturnsInstance() {
         assertThat(testRepository, is(not(equalTo(null))));
     }
 
-    @Test
-    public void GetOne_RecordExists_ReturnsResult() {
-        // Arrange
-        Student student = new Student("01", "Dan Greene", "");
-        testRepository.create(student);
-
-        // Act
-        Student result = testRepository.getOne(student.getId());
-        System.out.println(student.getId());
-
-        // Assert
-        assertThat(result.getName(), is(equalTo("Dan Greene")));
-    }
-
-    @Test
-    public void CreateTestData_DataCreated() {
-        testRepository.createTestData();
-        List<Student> students = testRepository.getAll();
-        assertThat(students.size(), is(equalTo(13)));
-    }
-    
     @Test
     public void StudentSummary_SummaryResultsReturned() {
         testRepository.createTestData();
@@ -89,9 +67,9 @@ public class MongoStudentRepositoryTests {
             count++;
             results.next();
         }
-        assertThat(count, is(equalTo(13)));
+        assertThat(count, is(equalTo(3)));
     }
-
+    
     @AfterClass
     public static void oneTimeTearDown() {
         testRepository.createTestData();

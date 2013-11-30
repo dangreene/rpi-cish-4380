@@ -7,12 +7,12 @@
 package org.cish4380.groupproject.dataaccess;
 
 import java.util.Iterator;
-import org.cish4380.groupproject.domain.StudentSummary;
+import org.cish4380.groupproject.domain.StudentSummaryResult;
 
 /**
  *
  * @author Dan
  */
 public interface StudentsSummaryRepository {
-    Iterator<StudentSummary> getStudentSummaryResults();
+    Iterator<StudentSummaryResult> getStudentSummaryResults();
 }
