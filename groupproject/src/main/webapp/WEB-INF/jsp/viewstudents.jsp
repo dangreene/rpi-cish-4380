@@ -34,7 +34,8 @@
                 </c:forEach>
             </table>
         </c:if>
-
+        
+        <p>Total Time: ${totalTime}</p>
         <br/>
         <a href="${pageContext.request.contextPath}/">Home</a>
     </body>

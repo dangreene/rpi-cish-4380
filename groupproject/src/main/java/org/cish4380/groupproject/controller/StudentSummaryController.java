@@ -10,6 +10,8 @@ import java.util.Iterator;
 import javax.annotation.Resource;
 import org.cish4380.groupproject.dataaccess.StudentRepository;
 import org.cish4380.groupproject.domain.StudentSummaryResult;
+import org.cish4380.groupproject.utility.PerformanceCounter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,11 +30,22 @@ public class StudentSummaryController {
         this.studentRepository.createTestData();
     }
     
+    @Autowired
+    private PerformanceCounter performanceCounter;
+    
+    public void setPerformanceCounter(PerformanceCounter counter) {
+        this.performanceCounter = counter;
+    }
+    
     @RequestMapping("studentsummary")
     public ModelAndView loadViewStudents() {
+        performanceCounter.start();
         Iterator<StudentSummaryResult> students = studentRepository.getStudentSummaryResults();
+        String totalTime = performanceCounter.getDuration();
+        
         ModelAndView modelAndView = new ModelAndView("viewstudentsummary");
         modelAndView.addObject("students", students);
+        modelAndView.addObject("totalTime", totalTime);
         return modelAndView;
     }
 }

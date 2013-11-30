@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
     </head>
     <body>
-        <h2>Registered Students</h2>
+        <h2>Student Credit Summary</h2>
 
         <c:if test="${not empty students}">
             <table class="pure-table">
@@ -37,7 +37,7 @@
                 </c:forEach>
             </table>
         </c:if>
-
+        <p>Total Time: ${totalTime}</p>
         <br/>
         <a href="${pageContext.request.contextPath}/">Home</a>
     </body>

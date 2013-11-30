@@ -27,25 +27,36 @@
             </tr>
         </table>
 
-    <c:if test="${not empty student.courses}">
-        <h2>Courses</h2>
-        <table class="pure-table">
-            <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Credits</td>
-                </tr>
-            </thead>
+        <c:if test="${not empty student.courses}">
+            <h2>Courses</h2>
+            <table class="pure-table">
+                <thead>
+                    <tr>
+                        <td>Course</td>
+                        <td>Section</td>
+                        <td>Semester</td>
+                        <td>Year</td>
+                        <td>Grade</td>
+                        <td>Credits</td>
+                    </tr>
+                </thead>
 
-            <c:forEach var="listValue" items="${student.courses}">
-                <tr>
-                    <td>${listValue.courseId}</td>
-                    <td>${listValue.credits}</td>
-                </tr>    
-            </c:forEach>
-        </table>
-    </c:if>
+                <c:forEach var="listValue" items="${student.courses}">
+                    <tr>
+                        <td>${listValue.courseId}</td>
+                        <td>${listValue.sectionId}</td>
+                        <td>${listValue.semester}</td>
+                        <td>${listValue.year}</td>
+                        <td>${listValue.grade}</td>
+                        <td>${listValue.credits}</td>
+                    </tr>    
+                </c:forEach>
+            </table>
+        </c:if>
+        <p>Total Time: ${totalTime}</p>
+        <br/>
 
-    <a href="${pageContext.request.contextPath}/students">Back to registered students</a>
-</body>
+        <a href="${pageContext.request.contextPath}/students">Back to registered students</a><br/>
+        <a href="${pageContext.request.contextPath}/">Home</a>
+    </body>
 </html>
