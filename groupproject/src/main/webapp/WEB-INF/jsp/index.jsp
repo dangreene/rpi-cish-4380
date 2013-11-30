@@ -13,6 +13,9 @@
     </head>
     <body>
         <h1>MongoDB implementation</h1>
-        <a href="${pageContext.request.contextPath}/students/">View Students</a>
+        <ul>
+            <li><a href="${pageContext.request.contextPath}/students/">View Students</a></li>
+            <li><a href="${pageContext.request.contextPath}/studentsummary/">View Students Credit Summary</a></li>
+        </ul>
     </body>
 </html>

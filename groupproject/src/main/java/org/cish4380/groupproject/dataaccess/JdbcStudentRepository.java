@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
  * @author Dan
  */
 
-@Component
+@Component("jdbcStudentRepository")
 public class JdbcStudentRepository implements StudentRepository {
     
     @Autowired
