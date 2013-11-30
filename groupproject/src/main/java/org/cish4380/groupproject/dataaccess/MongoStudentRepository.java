@@ -76,6 +76,8 @@ public class MongoStudentRepository implements Repository<Student>, StudentsSumm
 
     @Override
     public void createTestData() {
+        this.dropCollection();
+        this.createCollection();
         Student s1 = new Student("11128", "Zhang", "Comp. Sci.");
         s1.addCourse(new Course("CS-101", (short) 1, "Fall", (short) 2009, "A", (short) 4));
         s1.addCourse(new Course("CS-347", (short) 1, "Fall", (short) 2009, "A-", (short) 3));

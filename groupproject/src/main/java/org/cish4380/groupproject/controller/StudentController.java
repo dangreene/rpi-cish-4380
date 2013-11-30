@@ -7,7 +7,6 @@ package org.cish4380.groupproject.controller;
 
 import java.util.List;
 import org.cish4380.groupproject.dataaccess.Repository;
-import org.cish4380.groupproject.domain.Course;
 import org.cish4380.groupproject.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,8 +27,6 @@ public class StudentController {
     @Autowired
     public StudentController(Repository<Student> repository) {
         this.studentRepository = repository;
-        this.studentRepository.dropCollection();
-        this.studentRepository.createCollection();
         this.studentRepository.createTestData();
     }
 

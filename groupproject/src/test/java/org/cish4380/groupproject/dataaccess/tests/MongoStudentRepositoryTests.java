@@ -46,8 +46,7 @@ public class MongoStudentRepositoryTests {
     public void SetupTest() {
         //TODO: Instantiate repo
         testRepository = getStudentRepository();
-        testRepository.dropCollection();
-        testRepository.createCollection();
+        testRepository.createTestData();
     }
 
     private static Repository<Student> testRepository;
@@ -73,14 +72,14 @@ public class MongoStudentRepositoryTests {
 
     @Test
     public void CreateTestData_DataCreated() {
-        testRepository.createTestData();
+        
         List<Student> students = testRepository.getAll();
         assertThat(students.size(), is(equalTo(13)));
     }
     
     @Test
     public void StudentSummary_SummaryResultsReturned() {
-        testRepository.createTestData();
+
         StudentsSummaryRepository repo = (StudentsSummaryRepository)testRepository;
         Iterator<StudentSummaryResult> results = repo.getStudentSummaryResults();
         

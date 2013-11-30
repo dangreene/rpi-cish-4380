@@ -63,6 +63,8 @@ public class MongoStudentWithCourseRepository implements Repository<StudentWithC
 
     @Override
     public void createTestData() {
+        this.dropCollection();
+        this.createCollection();
         StudentWithCourse s1c1 = new StudentWithCourse("11128", "Zhang", "Comp. Sci.", new Course("CS-101", (short) 1, "Fall", (short) 2009, "A", (short) 4));
 
         StudentWithCourse s1c2 = new StudentWithCourse("11128", "Zhang", "Comp. Sci.", new Course("CS-347", (short) 1, "Fall", (short) 2009, "A-", (short) 3));

@@ -44,8 +44,7 @@ public class MongoStudentWithCourseRepositoryTests {
     public void SetupTest() {
         //TODO: Instantiate repo
         testRepository = getStudentRepository();
-        testRepository.dropCollection();
-        testRepository.createCollection();
+        testRepository.createTestData();
     }
 
     private static Repository<StudentWithCourse> testRepository;
@@ -57,7 +56,6 @@ public class MongoStudentWithCourseRepositoryTests {
 
     @Test
     public void StudentSummary_SummaryResultsReturned() {
-        testRepository.createTestData();
         StudentsSummaryRepository repo = (StudentsSummaryRepository)testRepository;
         Iterator<StudentSummaryResult> results = repo.getStudentSummaryResults();
         
