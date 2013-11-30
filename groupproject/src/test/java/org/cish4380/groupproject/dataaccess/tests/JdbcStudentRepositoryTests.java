@@ -12,10 +12,9 @@ import java.util.Iterator;
 import java.util.List;
 import org.cish4380.groupproject.dataaccess.JdbcStudentRepository;
 import org.cish4380.groupproject.dataaccess.Repository;
-import org.cish4380.groupproject.dataaccess.StudentsSummaryRepository;
+import org.cish4380.groupproject.dataaccess.StudentRepository;
 import org.cish4380.groupproject.domain.Course;
 import org.cish4380.groupproject.domain.Student;
-import org.cish4380.groupproject.domain.StudentSummary;
 import org.cish4380.groupproject.domain.StudentSummaryResult;
 import org.cish4380.groupproject.springconfig.WebConfig;
 import static org.hamcrest.CoreMatchers.*;
@@ -29,7 +28,7 @@ import org.junit.Test;
  */
 public class JdbcStudentRepositoryTests {
 
-    public Repository<Student> getStudentRepository() {
+    public StudentRepository getStudentRepository() {
 
         JdbcStudentRepository repo = new JdbcStudentRepository();
         WebConfig config = new WebConfig();
@@ -43,7 +42,7 @@ public class JdbcStudentRepositoryTests {
         testRepository = getStudentRepository();
     }
 
-    private Repository<Student> testRepository;
+    private StudentRepository testRepository;
 
     @Test
     public void NewRepository_ReturnsInstance() {
@@ -87,8 +86,8 @@ public class JdbcStudentRepositoryTests {
     
     @Test
     public void getStudentSummaryResults() {
-        StudentsSummaryRepository repo = (StudentsSummaryRepository) testRepository;
-        Iterator<StudentSummaryResult> summaries = repo.getStudentSummaryResults();
+        
+        Iterator<StudentSummaryResult> summaries = testRepository.getStudentSummaryResults();
 
         StudentSummaryResult s = Iterators.find(summaries, new Predicate<StudentSummaryResult>() {
             @Override
@@ -102,8 +101,7 @@ public class JdbcStudentRepositoryTests {
     
     @Test
     public void getStudentSummaryResults_nocourses_0credits() {
-        StudentsSummaryRepository repo = (StudentsSummaryRepository) testRepository;
-        Iterator<StudentSummaryResult> summaries = repo.getStudentSummaryResults();
+        Iterator<StudentSummaryResult> summaries = testRepository.getStudentSummaryResults();
 
         StudentSummaryResult s = Iterators.find(summaries, new Predicate<StudentSummaryResult>() {
             @Override

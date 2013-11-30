@@ -21,13 +21,11 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import org.cish4380.groupproject.domain.Student;
-import org.cish4380.groupproject.domain.StudentSummary;
 import org.cish4380.groupproject.domain.StudentSummaryResult;
-import org.springframework.data.mongodb.core.mapreduce.MapReduceOptions;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 
-@Component
-public class MongoStudentRepository implements Repository<Student>, StudentsSummaryRepository {
+@Component("mongoStudentRepository")
+public class MongoStudentRepository implements StudentRepository {
 
     @Autowired
     private MongoTemplate mongoTemplate;

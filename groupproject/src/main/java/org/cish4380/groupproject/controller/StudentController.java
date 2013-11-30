@@ -6,9 +6,9 @@
 package org.cish4380.groupproject.controller;
 
 import java.util.List;
-import org.cish4380.groupproject.dataaccess.Repository;
+import javax.annotation.Resource;
+import org.cish4380.groupproject.dataaccess.StudentRepository;
 import org.cish4380.groupproject.domain.Student;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +21,17 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class StudentController {
-
-    private final Repository<Student> studentRepository;
-
-    @Autowired
-    public StudentController(Repository<Student> repository) {
+    
+    @Resource(name = "mongoStudentRepository")
+    private StudentRepository studentRepository;
+    
+    public void setRepository(StudentRepository repository) {
         this.studentRepository = repository;
         this.studentRepository.createTestData();
+    }
+    
+    public StudentController() {
+   
     }
 
     @RequestMapping("/")

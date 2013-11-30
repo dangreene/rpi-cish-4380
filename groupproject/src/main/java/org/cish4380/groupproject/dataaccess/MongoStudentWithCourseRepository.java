@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
  *
  * @author Dan
  */
-public class MongoStudentWithCourseRepository implements Repository<StudentWithCourse>, StudentsSummaryRepository {
+public class MongoStudentWithCourseRepository implements StudentWithCourseRepository {
 
     @Autowired
     private MongoTemplate mongoTemplate;

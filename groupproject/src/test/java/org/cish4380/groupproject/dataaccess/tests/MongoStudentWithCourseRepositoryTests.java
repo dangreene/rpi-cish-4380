@@ -9,7 +9,8 @@ package org.cish4380.groupproject.dataaccess.tests;
 import java.util.Iterator;
 import org.cish4380.groupproject.dataaccess.MongoStudentWithCourseRepository;
 import org.cish4380.groupproject.dataaccess.Repository;
-import org.cish4380.groupproject.dataaccess.StudentsSummaryRepository;
+import org.cish4380.groupproject.dataaccess.StudentRepository;
+import org.cish4380.groupproject.dataaccess.StudentWithCourseRepository;
 import org.cish4380.groupproject.domain.StudentSummaryResult;
 import org.cish4380.groupproject.domain.StudentWithCourse;
 import org.cish4380.groupproject.springconfig.WebConfig;
@@ -26,7 +27,7 @@ import org.junit.Test;
  * @author Dan
  */
 public class MongoStudentWithCourseRepositoryTests {
-    public Repository<StudentWithCourse> getStudentRepository() {
+    public StudentWithCourseRepository getStudentRepository() {
 
         MongoStudentWithCourseRepository repo = null;
 
@@ -47,7 +48,7 @@ public class MongoStudentWithCourseRepositoryTests {
         testRepository.createTestData();
     }
 
-    private static Repository<StudentWithCourse> testRepository;
+    private static StudentWithCourseRepository testRepository;
 
     @Test
     public void GetRepository_ReturnsInstance() {
@@ -56,8 +57,7 @@ public class MongoStudentWithCourseRepositoryTests {
 
     @Test
     public void StudentSummary_SummaryResultsReturned() {
-        StudentsSummaryRepository repo = (StudentsSummaryRepository)testRepository;
-        Iterator<StudentSummaryResult> results = repo.getStudentSummaryResults();
+        Iterator<StudentSummaryResult> results = testRepository.getStudentSummaryResults();
         
         int count = 0;
         while (results.hasNext()) {

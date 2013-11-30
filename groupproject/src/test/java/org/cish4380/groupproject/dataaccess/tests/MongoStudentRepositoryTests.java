@@ -9,9 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import org.cish4380.groupproject.dataaccess.Repository;
 import org.cish4380.groupproject.dataaccess.MongoStudentRepository;
-import org.cish4380.groupproject.dataaccess.StudentsSummaryRepository;
+import org.cish4380.groupproject.dataaccess.StudentRepository;
 import org.cish4380.groupproject.domain.Student;
-import org.cish4380.groupproject.domain.StudentSummary;
 import org.cish4380.groupproject.domain.StudentSummaryResult;
 import org.cish4380.groupproject.springconfig.WebConfig;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -28,7 +27,7 @@ import org.junit.Test;
  */
 public class MongoStudentRepositoryTests {
 
-    public Repository<Student> getStudentRepository() {
+    public StudentRepository getStudentRepository() {
 
         MongoStudentRepository repo = null;
 
@@ -49,7 +48,7 @@ public class MongoStudentRepositoryTests {
         testRepository.createTestData();
     }
 
-    private static Repository<Student> testRepository;
+    private static StudentRepository testRepository;
 
     @Test
     public void GetRepository_ReturnsInstance() {
@@ -80,8 +79,8 @@ public class MongoStudentRepositoryTests {
     @Test
     public void StudentSummary_SummaryResultsReturned() {
 
-        StudentsSummaryRepository repo = (StudentsSummaryRepository)testRepository;
-        Iterator<StudentSummaryResult> results = repo.getStudentSummaryResults();
+
+        Iterator<StudentSummaryResult> results = testRepository.getStudentSummaryResults();
         
         int count = 0;
         while (results.hasNext()) {

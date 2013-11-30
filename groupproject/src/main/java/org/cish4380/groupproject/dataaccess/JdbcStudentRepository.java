@@ -26,8 +26,9 @@ import org.springframework.stereotype.Component;
  *
  * @author Dan
  */
+
 @Component
-public class JdbcStudentRepository implements Repository<Student>,StudentsSummaryRepository {
+public class JdbcStudentRepository implements StudentRepository {
     
     @Autowired
     private JdbcTemplate template;

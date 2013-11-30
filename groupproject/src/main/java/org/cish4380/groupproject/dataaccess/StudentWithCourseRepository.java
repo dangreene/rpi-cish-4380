@@ -6,13 +6,11 @@
 
 package org.cish4380.groupproject.dataaccess;
 
-import java.util.Iterator;
-import org.cish4380.groupproject.domain.StudentSummaryResult;
+import org.cish4380.groupproject.domain.StudentWithCourse;
 
 /**
  *
  * @author Dan
  */
-public interface StudentsSummaryRepository {
-    Iterator<StudentSummaryResult> getStudentSummaryResults();
+public interface StudentWithCourseRepository extends Repository<StudentWithCourse>, StudentSummaryRepository {
 }
