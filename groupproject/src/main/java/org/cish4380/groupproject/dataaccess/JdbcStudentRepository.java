@@ -5,6 +5,8 @@
  */
 package org.cish4380.groupproject.dataaccess;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import org.cish4380.groupproject.domain.StudentSummaryResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Component;
 
@@ -38,8 +41,17 @@ public class JdbcStudentRepository implements StudentRepository {
     }
     
     @Override
-    public Student getOne(String id) {
-        return this.template.query("select * from student left join takes using(ID) where ID =".concat(id), new StudentMapper()).get(0);
+    public Student getOne(final String id) {
+        PreparedStatementCreator psc = new PreparedStatementCreator() {
+
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement ps = con.prepareStatement("select * from student left join takes using(ID) where ID = ?");
+                ps.setString(1, id);
+                return ps;
+            }
+        };
+        return this.template.query(psc, new StudentMapper()).get(0);
     }
 
     @Override

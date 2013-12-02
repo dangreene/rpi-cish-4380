@@ -8,11 +8,8 @@ package org.cish4380.groupproject.dataaccess.tests;
 
 import java.util.Iterator;
 import org.cish4380.groupproject.dataaccess.MongoStudentWithCourseRepository;
-import org.cish4380.groupproject.dataaccess.Repository;
-import org.cish4380.groupproject.dataaccess.StudentRepository;
 import org.cish4380.groupproject.dataaccess.StudentWithCourseRepository;
 import org.cish4380.groupproject.domain.StudentSummaryResult;
-import org.cish4380.groupproject.domain.StudentWithCourse;
 import org.cish4380.groupproject.springconfig.WebConfig;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;

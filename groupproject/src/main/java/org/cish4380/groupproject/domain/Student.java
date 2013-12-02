@@ -17,6 +17,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "student")
 public class Student {
 
+    @Id
+    private String id;
+    private String name;
+    private String departmentName;
+    private final List<Course> courses = new ArrayList<>();
+    
     public Student() {
 
     }
@@ -26,10 +32,7 @@ public class Student {
         this.name = name;
         this.departmentName = departmentName;
     }
-
-    @Id
-    private String id;
-
+    
     public String getId() {
         return id;
     }
@@ -38,7 +41,7 @@ public class Student {
         this.id = id;
     }
 
-    private String name;
+    
 
     public String getName() {
         return name;
@@ -48,7 +51,7 @@ public class Student {
         this.name = firstName;
     }
     
-    private String departmentName;
+    
     
     public String getDepartmentName() {
         return departmentName;
@@ -58,7 +61,7 @@ public class Student {
         this.departmentName = departmentName;
     }
 
-    private final List<Course> courses = new ArrayList<>();
+    
 
     public Iterable<Course> getCourses() {
         return courses;

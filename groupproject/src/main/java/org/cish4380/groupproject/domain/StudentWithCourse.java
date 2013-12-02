@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.cish4380.groupproject.domain;
 
 import org.springframework.data.annotation.Id;
@@ -15,8 +14,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection = "StudentWithCourse")
 public class StudentWithCourse {
-    private Course course;
+
+    @Id
+    private String id;
+
     private String studentId;
+    private String name;
+    private String departmentName;
+    private Course course;
+
+    public StudentWithCourse() {
+
+    }
+
+    public StudentWithCourse(String studentId, String name, String departmentName, Course course) {
+        this.studentId = studentId;
+        this.name = name;
+        this.departmentName = departmentName;
+        this.course = course;
+    }
 
     public String getStudentId() {
         return studentId;
@@ -33,26 +49,10 @@ public class StudentWithCourse {
     public void setCourse(Course course) {
         this.course = course;
     }
-    
-    public StudentWithCourse() {
-
-    }
-
-    public StudentWithCourse(String studentId, String name, String departmentName, Course course) {
-        this.studentId = studentId;
-        this.name = name;
-        this.departmentName = departmentName;
-        this.course = course;
-    }
-    
-    @Id
-    private String id;
 
     public String getId() {
         return id;
     }
-
-    private String name;
 
     public String getName() {
         return name;
@@ -61,9 +61,7 @@ public class StudentWithCourse {
     public void setName(String firstName) {
         this.name = firstName;
     }
-    
-    private String departmentName;
-    
+
     public String getDepartmentName() {
         return departmentName;
     }

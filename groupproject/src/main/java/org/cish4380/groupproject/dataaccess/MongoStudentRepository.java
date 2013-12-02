@@ -161,7 +161,7 @@ public class MongoStudentRepository implements StudentRepository {
                         mapFunction,
                         reduceFunction,
                         StudentSummaryResult.class);
-
+        
         return reduceResult.iterator();
     }
 }

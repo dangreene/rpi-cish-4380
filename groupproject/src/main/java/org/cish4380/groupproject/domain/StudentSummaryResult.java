@@ -12,6 +12,7 @@ package org.cish4380.groupproject.domain;
  */
 public class StudentSummaryResult {
     private String id;
+    private StudentSummary value;
 
     public String getId() {
         return id;
@@ -28,5 +29,5 @@ public class StudentSummaryResult {
     public void setValue(StudentSummary value) {
         this.value = value;
     }
-    private StudentSummary value;
+    
 }

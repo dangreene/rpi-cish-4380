@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class StudentController {
     
-    @Resource(name = "jdbcStudentRepository")
+    @Resource(name = "mongoStudentRepository")
     private StudentRepository studentRepository;
     
     public void setRepository(StudentRepository repository) {

@@ -11,7 +11,9 @@ package org.cish4380.groupproject.domain;
  */
 public class StudentSummary {
 
+    private String name;
     private String department;
+    private Integer totalCredits;
 
     public String getDepartment() {
         return department;
@@ -36,7 +38,4 @@ public class StudentSummary {
     public void setTotalCredits(Integer totalCredits) {
         this.totalCredits = totalCredits;
     }
-    private String name;
-    private Integer totalCredits;
-  
 }
